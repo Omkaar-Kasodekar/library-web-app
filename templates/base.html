@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav a { margin-right: 15px; }
+
+        .flash {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .flash.error {
+            background-color: #ffe0e0;
+            color: #a10000;
+        }
+
+        .flash.success {
+            background-color: #e0ffe5;
+            color: #006400;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+</nav>
+
+<hr>
+
+{# -------- FLASH MESSAGES -------- #}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{# -------- PAGE CONTENT -------- #}
+{% block content %}{% endblock %}
+
+</body>
+</html>
